@@ -79,6 +79,8 @@ chartFile=$(printf '%s\n' "${files[@]}" | fzf --prompt="Select List of Charts ï„
 
 if [[ -n "$chartFile" ]]; then
 
+echo -e "${colors[cyan]}$chartFile"
+
 total_lines=$(wc -l < "$CHARTLIST_DIR/$chartFile")
 count=0  # Initialize count
 
@@ -94,4 +96,9 @@ count=0  # Initialize count
         wait $(pgrep -x "$(basename "$BROWSER")")
 
     done <$CHARTLIST_DIR/$chartFile
+	
+	echo -e "${colors[cyan]}~~~~~~~~~~~~~~~~~~~~~$cend"
+	
+	echo -e "${colors[cyan]}$chartFile : DONE$cend"
 fi
+
