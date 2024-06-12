@@ -72,13 +72,22 @@ else
     mkdir -p $CHARTLIST_DIR && echo -e "${colors[green]}$CHARTLIST_DIR : created$cend"
 fi
 
+echo -e "${colors[cyan]}~~~~~~~~~~~~~~~~~~~~~$cend"
+
 files=($(ls "$CHARTLIST_DIR"))
 chartFile=$(printf '%s\n' "${files[@]}" | fzf --prompt="Select List of Charts  " --height=30% --layout=reverse --border --exit-0)
 
 if [[ -n "$chartFile" ]]; then
-    while IFS= read -r line; do
 
-        echo -e "${colors[green]}$TV_URL$line$cend"
+total_lines=$(wc -l < "$CHARTLIST_DIR/$chartFile")
+count=0  # Initialize count
+
+    while IFS= read -r line; do
+	
+		count=$((count + 1))  # Increment count
+		echo -e "${colors[orange]}~~~~~ $count / $total_lines ~~~~~$cend"
+
+        echo -e "${colors[yellow]}$TV_URL$line$cend"
 
         $BROWSER "$TV_URL$line" >/dev/null 2>&1
 
