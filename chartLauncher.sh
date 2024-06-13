@@ -6,7 +6,23 @@ CHARTLIST_DIR="$BASE_DIR/chartList"
 
 TV_URL="https://www.tradingview.com/chart/?symbol="
 
-# BROWSER="google-chrome"
+#----------
+
+
+#TV_TIMEFRAME="1"
+#TV_TIMEFRAME="3"
+#TV_TIMEFRAME="5" 
+#TV_TIMEFRAME="15"
+#TV_TIMEFRAME="30"
+#TV_TIMEFRAME="60"
+
+TV_TIMEFRAME="D" 
+#TV_TIMEFRAME="W" 
+#TV_TIMEFRAME="M" 
+
+
+#----------
+
 BROWSER="firefox"
 
 #------------COLORS--------------
@@ -88,10 +104,12 @@ count=0  # Initialize count
 	
 		count=$((count + 1))  # Increment count
 		echo -e "${colors[orange]}~~~~~ $count / $total_lines ~~~~~$cend"
+		
+		LAUNCH_URL="$TV_URL$line&interval=$TV_TIMEFRAME"
 
-        echo -e "${colors[yellow]}$TV_URL$line$cend"
+        echo -e "${colors[yellow]}$LAUNCH_URL$cend"
 
-        $BROWSER "$TV_URL$line" >/dev/null 2>&1
+        $BROWSER "$LAUNCH_URL" >/dev/null 2>&1
 
         wait $(pgrep -x "$(basename "$BROWSER")")
 
