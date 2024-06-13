@@ -100,12 +100,14 @@ echo -e "${colors[cyan]}$chartFile"
 total_lines=$(wc -l < "$CHARTLIST_DIR/$chartFile")
 count=0  # Initialize count
 
-    while IFS= read -r line; do
+    while IFS= read -r scrip_name; do
 	
 		count=$((count + 1))  # Increment count
 		echo -e "${colors[orange]}~~~~~ $count / $total_lines ~~~~~$cend"
 		
-		LAUNCH_URL="$TV_URL$line&interval=$TV_TIMEFRAME"
+		echo -e "${colors[cyan]}$scrip_name$cend"
+		
+		LAUNCH_URL="$TV_URL$scrip_name&interval=$TV_TIMEFRAME"
 
         echo -e "${colors[yellow]}$LAUNCH_URL$cend"
 
